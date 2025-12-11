@@ -1,16 +1,19 @@
+# render.yaml - for Render.com
 services:
-  # Backend service
+  # Backend web service
   - type: web
     name: secure-print-hub-backend
     env: node
-    build:
-      command: npm install && npm run build
-      publish: ./backend
+    plan: free
+    region: oregon
+    # build/start commands run from the repo root — cd into backend first
+    buildCommand: cd backend && npm install && npm run build
+    startCommand: cd backend && npm start      # or node src/index.js (whatever you use)
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
-        value: 10000
+        value: "10000"
       - key: REDIS_URL
         fromDatabase:
           name: redis
@@ -18,35 +21,47 @@ services:
     healthCheckPath: /api/health
     instanceSize: free
     numInstances: 1
-    plan: free
-    region: oregon
     routes:
       - type: path
         path: /api/*
         destination: secure-print-hub-backend
 
-  # Frontend service
-  - type: web
-    name: secure-print-hub
-    env: node
-    build:
-      command: npm install && npm run build
-      publish: ./secure-print-hub
-      staticPath: "./secure-print-hub/dist"
+  # Frontend (Static Site)
+  - type: static
+    name: secure-print-hub-frontend
+    plan: free
+    region: oregon
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/dist
     envVars:
       - key: NODE_ENV
         value: production
     routes:
       - type: path
         path: /*
-        destination: secure-print-hub
-    instanceSize: free
-    numInstances: 1
+        destination: secure-print-hub-frontend
+
+  # Background worker (PDF generator)
+  - type: worker
+    name: secure-print-hub-worker
+    env: node
     plan: free
     region: oregon
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && node workers/pdfWorker.js   # or npm run worker if you have script
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: REDIS_URL
+        fromDatabase:
+          name: redis
+          property: connectionString
+    instanceSize: free
+    numInstances: 1
 
-# Redis for queue management
-redis:
-  name: redis
-  plan: free
-  region: oregon
+# Managed Redis (this block tells Render to create a managed Redis instance)
+databases:
+  - name: redis
+    engine: redis
+    plan: free
+    region: oregon
