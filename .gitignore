@@ -1,0 +1,32 @@
+# create .gitignore in current folder
+@'
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+backend/.env
+svg-to-pdf-service/.env
+cmyk-server/.env
+dist/
+build/
+out/
+coverage/
+logs/
+*.log
+.DS_Store
+Thumbs.db
+.cache/
+.tmp/
+.vscode/
+.idea/
+uploads/
+public/uploads/
+pids/
+*.pid
+*.swp
+'@ | Out-File -Encoding UTF8 .gitignore
