@@ -1,0 +1,52 @@
+services:
+  # Backend service
+  - type: web
+    name: secure-print-hub-backend
+    env: node
+    build:
+      command: npm install && npm run build
+      publish: ./backend
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: REDIS_URL
+        fromDatabase:
+          name: redis
+          property: connectionString
+    healthCheckPath: /api/health
+    instanceSize: free
+    numInstances: 1
+    plan: free
+    region: oregon
+    routes:
+      - type: path
+        path: /api/*
+        destination: secure-print-hub-backend
+
+  # Frontend service
+  - type: web
+    name: secure-print-hub
+    env: node
+    build:
+      command: npm install && npm run build
+      publish: ./secure-print-hub
+      staticPath: "./secure-print-hub/dist"
+    envVars:
+      - key: NODE_ENV
+        value: production
+    routes:
+      - type: path
+        path: /*
+        destination: secure-print-hub
+    instanceSize: free
+    numInstances: 1
+    plan: free
+    region: oregon
+
+# Redis for queue management
+redis:
+  name: redis
+  plan: free
+  region: oregon
