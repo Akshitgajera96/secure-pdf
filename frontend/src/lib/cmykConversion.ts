@@ -2,7 +2,7 @@ export async function convertPdfToCmykAndDownload(rgbPdfBlob: Blob, fileName: st
   const formData = new FormData();
   formData.append('file', rgbPdfBlob, 'tickets-rgb.pdf');
 
-  const response = await fetch('http://localhost:4000/api/convert-to-cmyk', {
+  const response = await fetch('https://secure-pdf-bny1.onrender.com/api/convert-to-cmyk', {
     method: 'POST',
     body: formData,
   });

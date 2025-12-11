@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
-const API_BASE_URL = "http://localhost:4000";
+const API_BASE_URL = "https://secure-pdf-bny1.onrender.com";
 
 const Security = () => {
   const { token } = useAuth();

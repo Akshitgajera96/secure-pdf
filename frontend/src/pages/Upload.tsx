@@ -83,7 +83,7 @@ const Upload = () => {
       formData.append('title', selectedFile.name);
       formData.append('totalPrints', '5');
 
-      const res = await fetch('http://localhost:4000/api/docs/upload', {
+      const res = await fetch('https://secure-pdf-bny1.onrender.com/api/docs/upload', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -140,7 +140,7 @@ const Upload = () => {
     try {
       const params = new URLSearchParams({ email: searchEmail.trim() });
       const usersRes = await fetch(
-        `http://localhost:4000/api/admin/users?${params.toString()}`,
+        `https://secure-pdf-bny1.onrender.com/api/admin/users?${params.toString()}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -175,7 +175,7 @@ const Upload = () => {
       setSelectedAdminTarget({ id: userId, email: target.email });
 
       const res = await fetch(
-        `http://localhost:4000/api/admin/users/${userId}/sessions`,
+        `https://secure-pdf-bny1.onrender.com/api/admin/users/${userId}/sessions`,
         {
           method: 'GET',
           headers: {
@@ -222,7 +222,7 @@ const Upload = () => {
     setIsLoggingOutAll(true);
 
     try {
-      const res = await fetch('http://localhost:4000/api/admin/logout-all', {
+      const res = await fetch('https://secure-pdf-bny1.onrender.com/api/admin/logout-all', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -265,7 +265,7 @@ const Upload = () => {
     setIsLoadingUsers(true);
 
     try {
-      const res = await fetch('http://localhost:4000/api/admin/users/active-sessions', {
+      const res = await fetch('https://secure-pdf-bny1.onrender.com/api/admin/users/active-sessions', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -310,7 +310,7 @@ const Upload = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:4000/api/admin/users/${selectedAdminTarget.id}/ip-overview`,
+        `https://secure-pdf-bny1.onrender.com/api/admin/users/${selectedAdminTarget.id}/ip-overview`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -351,7 +351,7 @@ const Upload = () => {
     setIsLoadingBlockedIps(true);
 
     try {
-      const res = await fetch('http://localhost:4000/api/admin/blocked-ips', {
+      const res = await fetch('https://secure-pdf-bny1.onrender.com/api/admin/blocked-ips', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -394,7 +394,7 @@ const Upload = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:4000/api/admin/users/${selectedAdminTarget.id}/block-other-ips`,
+        `https://secure-pdf-bny1.onrender.com/api/admin/users/${selectedAdminTarget.id}/block-other-ips`,
         {
           method: 'POST',
           headers: {
@@ -448,7 +448,7 @@ const Upload = () => {
 
     try {
       for (const id of selectedUserIds) {
-        const res = await fetch('http://localhost:4000/api/admin/logout-all', {
+        const res = await fetch('https://secure-pdf-bny1.onrender.com/api/admin/logout-all', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -718,7 +718,7 @@ const Upload = () => {
                             onClick={async () => {
                               if (!token) return;
                               try {
-                                const res = await fetch(`http://localhost:4000/api/admin/sessions/${s._id}/logout`, {
+                                const res = await fetch(`https://secure-pdf-bny1.onrender.com/api/admin/sessions/${s._id}/logout`, {
                                   method: 'POST',
                                   headers: {
                                     'Content-Type': 'application/json',
@@ -759,7 +759,7 @@ const Upload = () => {
                             onClick={async () => {
                               if (!token) return;
                               try {
-                                const res = await fetch(`http://localhost:4000/api/admin/sessions/${s._id}/block-ip`, {
+                                const res = await fetch(`https://secure-pdf-bny1.onrender.com/api/admin/sessions/${s._id}/block-ip`, {
                                   method: 'POST',
                                   headers: {
                                     'Content-Type': 'application/json',
@@ -855,8 +855,8 @@ const Upload = () => {
                                     if (!token) return;
                                     try {
                                       const url = row.isBlocked
-                                        ? 'http://localhost:4000/api/admin/unblock-ip'
-                                        : 'http://localhost:4000/api/admin/block-ip';
+                                        ? 'https://secure-pdf-bny1.onrender.com/api/admin/unblock-ip'
+                                        : 'https://secure-pdf-bny1.onrender.com/api/admin/block-ip';
                                       const res = await fetch(url, {
                                         method: 'POST',
                                         headers: {
@@ -945,7 +945,7 @@ const Upload = () => {
                                 if (!token) return;
                                 try {
                                   const res = await fetch(
-                                    'http://localhost:4000/api/admin/unblock-ip',
+                                    'https://secure-pdf-bny1.onrender.com/api/admin/unblock-ip',
                                     {
                                       method: 'POST',
                                       headers: {

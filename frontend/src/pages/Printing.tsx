@@ -40,7 +40,7 @@ const Printing = () => {
     try {
       setError(null);
 
-      const res = await fetch('http://localhost:4000/api/docs/assigned', {
+      const res = await fetch('https://secure-pdf-bny1.onrender.com/api/docs/assigned', {
         headers: {
           'Content-Type': 'application/json',
           ...(tokenRef.current ? { Authorization: `Bearer ${tokenRef.current}` } : {}),

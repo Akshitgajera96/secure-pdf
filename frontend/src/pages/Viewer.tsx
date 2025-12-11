@@ -36,7 +36,7 @@ const Viewer = () => {
         setLoading(true);
         setError(null);
 
-        const res = await fetch('http://localhost:4000/api/docs/secure-render', {
+        const res = await fetch('https://secure-pdf-bny1.onrender.com/api/docs/secure-render', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -112,7 +112,7 @@ const Viewer = () => {
     setIsPrinting(true);
     
     try {
-      const res = await fetch('http://localhost:4000/api/docs/secure-print', {
+      const res = await fetch('https://secure-pdf-bny1.onrender.com/api/docs/secure-print', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -35,7 +35,7 @@ const CreateUser = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:4000/api/admin/users', {
+      const response = await fetch('https://secure-pdf-bny1.onrender.com/api/admin/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

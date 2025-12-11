@@ -61,7 +61,7 @@ export const SeriesGenerator = ({ userId }: SeriesGeneratorProps) => {
     try {
       const templateBase64 = await fileToBase64(templateFile);
 
-      const res = await fetch('http://localhost:4000/api/series/generate', {
+      const res = await fetch('https://secure-pdf-bny1.onrender.com/api/series/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

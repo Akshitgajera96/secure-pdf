@@ -84,7 +84,7 @@ export const TicketOutputPreview: React.FC<TicketOutputPreviewProps> = ({ pages,
         if (uniqueImages.has(src)) continue;
 
         try {
-          const uploadRes = await fetch('http://localhost:4000/api/admin/upload-ticket-image', {
+          const uploadRes = await fetch('https://secure-pdf-bny1.onrender.com/api/admin/upload-ticket-image', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -154,7 +154,7 @@ export const TicketOutputPreview: React.FC<TicketOutputPreviewProps> = ({ pages,
       });
 
       // 3) Create background assignment job (no synchronous PDF generation, only S3 references)
-      const res = await fetch('http://localhost:4000/api/admin/assign-job', {
+      const res = await fetch('https://secure-pdf-bny1.onrender.com/api/admin/assign-job', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
